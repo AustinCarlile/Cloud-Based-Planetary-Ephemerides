@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High-Level Requirements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .requirement {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .requirement h2 {
+            color: #555;
+            margin-top: 0;
+        }
+        .requirement ul {
+            list-style-type: circle;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>High-Level Requirements</h1>
+
+    <div class="requirement">
+        <h2>Web Service Development:</h2>
+        <ul>
+            <li>Develop a Python-based RESTful web service to handle requests for generating ISD.</li>
+            <li>The service should interact with existing open-source software (like ALE) to process requests.</li>
+            <li>It should accept image labels and SPICE kernel quality parameters as input via web requests.</li>
+        </ul>
+    </div>
+
+    <div class="requirement">
+        <h2>Data Optimization:</h2>
+        <ul>
+            <li>Design a format to reduce the size of the JSON-formatted ISD data, possibly through binary conversion, compression, or a combination of methods.</li>
+            <li>Ensure the new format can be converted back into a standard ALE-supported format.</li>
+        </ul>
+    </div>
+
+    <div class="requirement">
+        <h2>Scaling and Performance:</h2>
+        <ul>
+            <li>Address the challenge of handling large-scale data processing, including thousands of simultaneous ISD requests.</li>
+            <li>Implement memoization to cache frequently queried data, reducing the time needed for data retrieval.</li>
+            <li>Develop a cache validation mechanism to update or invalidate cache entries when SPICE data is updated, ensuring data consistency.</li>
+        </ul>
+    </div>
+
+    <div class="requirement">
+        <h2>Deployment on AWS:</h2>
+        <ul>
+            <li>Design the service to be compatible with AWS free-tier for easy deployment and testing.</li>
+            <li>Aim for a setup that can be quickly deployed using tools like Docker.</li>
+        </ul>
+    </div>
+
+    <div class="requirement">
+        <h2>Stretch Goals:</h2>
+        <ul>
+            <li>Develop a queryable data store for ISD, allowing scientists to access and download cached ISD data more efficiently.</li>
+        </ul>
+    </div>
+</body>
+</html>
