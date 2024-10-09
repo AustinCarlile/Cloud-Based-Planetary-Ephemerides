@@ -17,6 +17,10 @@
             color: #555;
             margin-top: 0;
         }
+        .solution ul {
+            list-style-type: circle;
+            padding-left: 20px;
+        }
         .solution p {
             margin: 10px 0;
         }
@@ -31,21 +35,28 @@
 		.list-container {
 			text-align: center;
 		}
+		.content {
+			margin: 20px auto;
+			width: 40%
+		}
+		.content ul {
+			text-align: left
+		}
     </style>
 </head>
 <div class="bg"></div>
 
-    <div class="star-field">
-        <div class="layer"></div>
-        <div class="layer"></div>
-        <div class="layer"></div>
-    </div>
+<div class="star-field">
+	<div class="layer"></div>
+	<div class="layer"></div>
+	<div class="layer"></div>
+</div>
 <body>
     <div class="nav">
         <a href="index.html">
             <button>Home</button>
         </a>
-        <a href="project.html">
+		<a href="project.html">
             <button>Project</button>
         </a>
         <a href="contact.html">
@@ -57,44 +68,45 @@
         <a href="codebase.html">
             <button>Codebase</button>
         </a>
-	<a href="documents.html">
+        <a href="documents.html">
             <button>Documents</button>
         </a>
     </div>
     <h1>Project Solutions</h1>
 
-    <div class="solution">
+    <div class="solution content">
         <h2>RESTful Web Service:</h2>
         <p>The solution involves building a Python-based web service using frameworks like Flask or FastAPI. This service will provide a user-friendly interface for requesting ISD data without needing deep knowledge of SPICE or ISD internals. It will act as a bridge between the user and the ALE library, managing requests and responses seamlessly.</p>
     </div>
 
-    <div class="solution">
+    <div class="solution content">
         <h2>Data Compression and Format Optimization:</h2>
         <p>To address the challenge of large JSON data sizes, the service will implement a data compression mechanism, potentially using formats like gzip or custom binary formats to reduce the size of ISD files. This approach aims to reduce the data transfer time and storage space while maintaining the integrity of the ISD data.</p>
     </div>
 
-    <div class="solution">
+    <div class="solution content">
         <h2>Memoization and Caching:</h2>
         <p>Memoization will be used to cache frequently queried ISD data, reducing the need for repeated calculations. A caching layer, potentially using Redis or similar services, will store results from previous requests. The system will include a cache invalidation strategy to ensure that updated SPICE data is reflected in new ISD calculations.</p>
     </div>
 
-    <div class="solution">
+    <div class="solution content">
         <h2>Scalability and High Availability:</h2>
         <p>The service will be designed to scale horizontally, allowing it to handle multiple simultaneous ISD requests. This will involve optimizing the backend to manage concurrent requests and leveraging AWS infrastructure for load balancing and auto-scaling, ensuring that the service can meet the demands of high-powered computing environments.</p>
     </div>
 
-    <div class="solution">
+    <div class="solution content">
         <h2>AWS Integration:</h2>
         <p>The prototype will be deployable on AWS free-tier services, using EC2 or AWS Lambda for hosting, and S3 for storing the reduced ISD data. The service will be configured for cost-efficiency and ease of use, making it accessible for both testing and production environments.</p>
     </div>
 
-    <div class="solution">
+    <div class="solution content">
         <h2>Queryable ISD Data Store (Stretch Goal):</h2>
         <p>As an extension of the caching solution, the project will develop a queryable data store, allowing users to access cached ISD data efficiently. This solution will involve creating an index or metadata catalog to quickly retrieve stored ISD data, streamlining access for large-scale research.</p>
     </div>
 	
-	<div class="section-container">
-		<h1>Diagram of the Proposed Solution:</h1>
+	<h1>Diagram of the Proposed Solution</h1>
+	
+	<div class="section-container content">
 		<img src="images/Diagram.PNG" alt="Diagram of Proposed Solution" class="image">
 		<br />
 		<h3>As you can see in the diagram above, the user will interact with a web service that returns ISD images</h3>
@@ -112,5 +124,51 @@
 			</ol>
 		</div>		
 	</div>
+        
+    <h1>Technologies Used</h1>
+
+    <div class="solution content">
+        <h2>AWS:</h2>
+        <ul>
+            <li>Amazon Web Services will be utilized for hosting the web service, ensuring scalability and flexibility.</li>
+            <li>The free-tier services will allow the team to prototype the application without incurring costs.</li>
+            <li>Enables testing and demonstration of the service.</li>
+        </ul>
+    </div>
+
+    <div class="solution content">
+        <h2>Python:</h2>
+        <ul>
+            <li>Selected as the primary programming language due to its versatility and extensive libraries available.</li>
+            <li>Ideal for web development, data processing, and scientific computing.</li>
+            <li>Readability and ease of use make it an ideal choice for developing the backend services.</li>
+        </ul>
+    </div>
+
+    <div class="solution content">
+        <h2>ALE Library:</h2>
+        <ul>
+            <li>The ALE library is the main source for planetary image data processing from USGS.</li>
+            <li>Allows for the position, rotation, velocity, and rotational velocity tracking of multiple bodies in space, especially in relation to one another.</li>
+            <li>Makes extensive use of NAIF's SPICE data for calculations.</li>
+        </ul>
+    </div>
+
+    <div class="solution content">
+        <h2>GitHub:</h2>
+        <ul>
+            <li>This will be used for version control and collaboration among team members.</li>
+            <li>GitHub is widely used for version control and collaboration in programming projects.</li>
+            <li>Suitable for managing large projects efficiently, especially with multiple tasks going into the same files.</li>
+        </ul>
+    </div>
+
+    <div class="solution content">
+        <h2>Visual Studio Code:</h2>
+        <ul>
+            <li>A lightweight but powerful source code editor available for Windows, macOS, and Linux.</li>
+            <li>Comes with built-in support for JavaScript, TypeScript, and Node.js, and has a rich ecosystem of extensions for other languages (such as C++, C#, Python, PHP, Go) and runtimes (such as .NET and Unity).</li>
+        </ul>
+    </div>
 </body>
 </html>
