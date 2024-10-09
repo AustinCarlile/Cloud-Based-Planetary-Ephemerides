@@ -13,18 +13,19 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     text-align: center;
-    color: #060101;
+    color: #000000;
     background-color: lightblue;
-    margin: 20px;
+    margin: 0px;
+    padding: 0px;
 }
 
 h1 {
-    color: #ffffff;
+    color: #333;
     text-align: center;
 }
 
 h2 {
-    color: #151515;
+    color: #555;
 }
 
 p {
@@ -57,7 +58,7 @@ button {
 }
 
 a {
-    color: #1a73e8;
+    color: #ffffff;
     text-decoration: none;
 }
 
@@ -65,8 +66,9 @@ a:hover {
     text-decoration: underline;
 }
 
+
 .bg {
-    background: url(https://i.ibb.co/87GbbFP/2799006.jpg) no-repeat;
+    background: url(https://science.nasa.gov/wp-content/uploads/2023/04/c33-4-jpg.webp?w=1536&format=webp) no-repeat;
     background-size: cover;
     height: 100%;
     width: 100%;

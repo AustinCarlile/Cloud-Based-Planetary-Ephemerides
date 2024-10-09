@@ -2,131 +2,136 @@
 <html>
 
 <head>
-    <title>The In Your Orbit Team</title>
+    <title>Team</title>
+    <link rel="stylesheet" href="spaceStyles.css">
     <style>
-        body {
-            text-align: center;
-            background-color: lightblue;
-        }
 
-        ul {
-            list-style-position:inside;
-        }
-
-        button {
-            background-color: #074d35;
+        body, p, h1, h2, h3 {
             color: white;
-            padding: 10px 20px;
-            margin: 0 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        a {
+            color: white;
+            text-decoration: underline;
+        }
+
+
+        .contact-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 10px;
+            max-width: 100vw;
         }
 
         .contact {
-            margin-bottom: 20px;
+            text-align: center;
+            margin-bottom: 10px;
         }
 
         .contact img {
             align-items: center;
             width: 110px;
             height: 110px;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: center;
-            background-color: #074d35;
-            padding: 10px;
+            border-radius: 10px;
         }
 
     </style>
 </head>
+<div class="bg"></div>
+
+<div class="star-field">
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+</div>
 
 <body>
     <div class="nav">
         <a href="index.html">
             <button>Home</button>
         </a>
+        <a href="project.html">
+            <button>Project</button>
+        </a>
         <a href="contact.html">
             <button>Team</button>
         </a>
-        <a href="Demo.html">
-            <button>Demo</button>
+        <a href="solutions.html">
+            <button>Solution</button>
         </a>
         <a href="codebase.html">
             <button>Codebase</button>
         </a>
-        <a href="schedule.html">
-            <button>Schedule</button>
-        </a>
-        <a href="solutions.html">
-            <button>Solutions</button>
-        </a>
-        <a href="technologies.html">
-            <button>Technologies</button>
-        </a>
-        <a href="highlevelrequirement.html">
-            <button>High Level Requirement</button>
+        <a href="related.html">
+            <button>Related</button>
         </a>
     </div>
     
-    <h1>In Your Orbit</h1>
+    <h1>In Your Orbit Team</h1>
 
-    <div class="contact">
-        <img src="images/austin.png" alt="Austin Carlile">
-        <div>
-            <h3>Austin Carlile</h3>
-            <h2>Roles on the Team:</h2>
-            <ul>
-                <li>Team Leader</li>
-                <li>Customer Communicator</li>
-                <li>Coder</li>
-            </ul>
-            <p>Email: <a href="mailto:akc323@nau.edu">akc323@nau.edu</a></p>
-            <p>Phone: <a href="tel:9079889611">907-988-9611</a></p>
+    <div class="contact-container">
+        <div class="contact">
+            <img src="images/austin.png" alt="Austin Carlile">
+            <div>
+                <h2>Austin Carlile</h2>
+                <h3>Roles on the Team:</h3>
+                <ul>
+                    <li>Team Leader</li>
+                    <li>Customer Communicator</li>
+                    <li>Coder</li>
+                </ul>
+                <p>Email: <a href="mailto:akc323@nau.edu">akc323@nau.edu</a></p>
+                <p>Phone: <a href="tel:9079889611">907-988-9611</a></p>
+            </div>
         </div>
-    </div>
 
-    <div class="contact">
-        <img src="images/cole.png" alt="Cole Gonzalez">
-        <div>
-            <h3>Cole Gonzalez</h3>
-            <h2>Roles on the Team:</h2>
-            <ul>
-                <li>Recorder</li>
-                <li>Coder</li>
-            </ul>
-            <p>Email: <a href="mailto:nrg256@nau.edu">nrg256@nau.edu</a></p>
-            <p>Phone: <a href="tel:6237765621">623-776-5621</a></p>
+        <div class="contact">
+            <img src="images/cole.png" alt="Cole Gonzalez">
+            <div>
+                <h2>Cole Gonzalez</h2>
+                <h3>Roles on the Team:</h3>
+                <ul>
+                    <li>Recorder</li>
+                    <li>Coder</li>
+                </ul>
+                <p>Email: <a href="mailto:nrg256@nau.edu">nrg256@nau.edu</a></p>
+                <p>Phone: <a href="tel:6237765621">623-776-5621</a></p>
+            </div>
         </div>
-    </div>
 
-    <div class="contact">
-        <img src="images/noah.png" alt="Noah Schwartz">
-        <div>
-            <h3>Noah Schwartz</h3>
-            <h2>Roles on the Team:</h2>
-            <ul>
-                <li>Release Manager</li>
-                <li>Coder</li>
-            </ul>
-            <p>Email: <a href="mailto:nas489@nau.edu">nas489@nau.edu</a></p>
-            <p>Phone: <a href="tel:4804871484">480-487-1484</a></p>
+        <div class="contact">
+            <img src="images/noah.png" alt="Noah Schwartz">
+            <div>
+                <h2>Noah Schwartz</h2>
+                <h3>Roles on the Team:</h3>
+                <ul>
+                    <li>Release Manager</li>
+                    <li>Coder</li>
+                </ul>
+                <p>Email: <a href="mailto:nas489@nau.edu">nas489@nau.edu</a></p>
+                <p>Phone: <a href="tel:4804871484">480-487-1484</a></p>
+            </div>
         </div>
-    </div>
 
-    <div class="contact">
-        <img src="images/minuka.png" alt="Minuka Trikawalagoda">
-        <div>
-            <h3>Minuka Trikawalagoda</h3>
-            <h2>Roles on the Team:</h2>
-            <ul>
-                <li>Architect</li>
-                <li>Coder</li>
-            </ul>
-            <p>Email: <a href="mailto:mt2464@nau.edu">mt2464@nau.edu</a></p>
-            <p>Phone: <a href="tel:9284237663">928-423-7663</a></p>
+        <div class="contact">
+            <img src="images/minuka.png" alt="Minuka Trikawalagoda">
+            <div>
+                <h2>Minuka Trikawalagoda</h2>
+                <h3>Roles on the Team:</h3>
+                <ul>
+                    <li>Architect</li>
+                    <li>Coder</li>
+                </ul>
+                <p>Email: <a href="mailto:mt2464@nau.edu">mt2464@nau.edu</a></p>
+                <p>Phone: <a href="tel:9284237663">928-423-7663</a></p>
+            </div>
         </div>
     </div>
 </body>

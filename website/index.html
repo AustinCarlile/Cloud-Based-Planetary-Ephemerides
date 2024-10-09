@@ -3,77 +3,114 @@
 
 <head>
     <title>In Your Orbit</title>
+    <link rel="stylesheet" href="spaceStyles.css">
     <style>
-        body {
-            text-align: center;
-            color: #000000;
-            background-color: lightblue;
+        h1 {
+            color: black;
         }
 
-        button {
-            background-color: #074d35;
-            color: white;
-            padding: 10px 20px;
-            margin: 0 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        a {
+            color: blue;
+            text-decoration: underline;
         }
+
         .content-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .logo {
-            width: 150px;
-            height: 150px;
-            margin: 0 20px;
+            justify-content: space-between;
+            margin: 10px;
         }
 
-        .nav {
-            display: flex;
-            justify-content: center;
-            background-color: #074d35;
+        .description {
+            flex: 1;
+            margin: 10px;
+            background: #fff;
             padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .description h2 {
+            color: #555;
+            margin-top: 0;
+        }
+
+        .description p {
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        .side-pic {
+            flex: 1;
+            margin: 10px;
+            margin-bottom: 20px;
+        }
+
+        .side-pic img {
+            width: 100%;
+            border-radius: 5px;
         }
     </style>
 </head>
+
+<div class="bg"></div>
+
+<div class="star-field">
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+</div>
 
 <body>
     <div class="nav">
         <a href="index.html">
             <button>Home</button>
         </a>
+        <a href="project.html">
+            <button>Project</button>
+        </a>
         <a href="contact.html">
             <button>Team</button>
         </a>
-        <a href="Demo.html">
-            <button>Demo</button>
+        <a href="solutions.html">
+            <button>Solution</button>
         </a>
         <a href="codebase.html">
             <button>Codebase</button>
         </a>
-        <a href="schedule.html">
-            <button>Schedule</button>
-        </a>
-        <a href="solutions.html">
-            <button>Solutions</button>
-        </a>
-        <a href="technologies.html">
-            <button>Technologies</button>
-        </a>
-        <a href="highlevelrequirement.html">
-            <button>High Level Requirement</button>
+        <a href="related.html">
+            <button>Related</button>
         </a>
     </div>
-    <h1>In Your Orbit:
-        <br>Cloud-Based Planetary Ephemerides
-        <br> A Capstone Project Partnered with USGS Astrogeology Science Center
-    </h1>
     <div class="content-container">
-        <img src="images/capstonelogo.png" alt="Team Logo" class="logo">
-        <h1>Website Currently Under Construction</h1>
-        <img src="images/usgslogo.png" alt="USGS Logo" class="logo">
+        <div class="description">
+            <h1>Project Description</h1>
+            <p>Our sponsor USGS Astrogeology currently faces many challenges alongside NASA scientists when it comes to
+                generating Image Support Data (ISD) for planetary imagery processing. Users of their current system must
+                download large portions of NASA's SPICE dataset to create ISD files, which is time-consuming and a
+                roadblock. Additionally, their current system using Amazon ECS additionally costs the company near
+                $10,000 a month. We will be implementing a RESTful service that integrates USGS's current software (see
+                related links page) so users can access the ISD data online without downloading massive datasets. This
+                new process also ideally will be free for USGS Astrogeology as well as other organizations using the
+                system. Our solution will implement a caching system to reduce ISD generation time by retrieving
+                pre-calculated ISD files then compress large ISD files to reduce the data footprint. This will run on an
+                AWS server taking advantage of the scalability features it offers.</p>
+            <h2>Diagram of Proposed Solution</h2>
+            <img src="https://github.com/Snow0611/Cloud-Based-Planetary-Ephemerides/blob/main/website/images/Diagram.PNG?raw=true"
+                alt="Diagram of projected solution" width="500" />
+            <h2>
+                <center>Link to Project Briefing</center>
+            </h2>
+            <a href="https://www.ceias.nau.edu/cs/CS_Capstone/Projects/F24/1.F24_USGS_Kelvin.pdf">
+                <center>Project Briefing</center>
+            </a>
+            <h4></h4>
+            <h2>Link to USGS Astrogeology</h2>
+            <a href="https://www.usgs.gov/centers/astrogeology-science-center">USGS Astrogeology</a>
+        </div>
+        <div class="side-pic">
+            <img src="images/homepage_galaxy.png" alt="Galaxy">
+        </div>
     </div>
 </body>
 

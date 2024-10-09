@@ -4,7 +4,8 @@ body {
     text-align: center;
     color: #000000;
     background-color: lightblue;
-    margin: 20px;
+    margin: 0px;
+    padding: 0px;
 }
 
 h1 {
