@@ -14,6 +14,7 @@ import sys
 app = FastAPI()
 
 path = pathlib.Path(__file__).parent.resolve()
+os.makedir(f'path/{returned_isds}')
 
 aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')
 aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
