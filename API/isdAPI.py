@@ -4,6 +4,7 @@ import boto3
 import brotli
 import decimal
 import hashlib
+import pathlib
 import pvl
 import json
 import os
@@ -11,6 +12,8 @@ import shutil
 import sys
 
 app = FastAPI()
+
+path = pathlib.Path(__file__).parent.resolve()
 
 aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')
 aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -108,7 +111,7 @@ async def get_isd(request: Request):
     # remove isd key, only have inner values
     outputDict = outputDict['isd']
     
-    outputFile = f"/home/austin/ale/miniLabels/docker_api/returned_isds/{isd_hash}_isd.json"
+    outputFile = f"{path}/returned_isds/{isd_hash}_isd.json"
 
     # serializes dictionary to json object and writes to file
     with open(outputFile, 'w') as isd_output:

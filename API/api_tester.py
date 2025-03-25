@@ -11,6 +11,8 @@ test_client = TestClient(app)
 
 #inLabel = sys.argv[1]
 
+path = pathlib.Path(__file__).parent.resolve()
+
 
 def test_send_encode(inLabel):
     
@@ -36,6 +38,5 @@ def test_send(inLabel):
     assert response.status_code == 200
     
 if __name__ == "__main__":
-    for file in os.listdir('/home/austin/ale/miniLabels/docker_api/data/lbl//'):
-         test_send_encode(f'/home/austin/ale/miniLabels/docker_api/data/lbl/{file}')
-    #test_send_encode('/home/austin/ale/miniLabels/docker_api/M103595705LE_isis3.lbl')
+    for file in os.listdir(f'{path}/test_data/'):
+         test_send_encode(f'{path}/test_data/{file}')
