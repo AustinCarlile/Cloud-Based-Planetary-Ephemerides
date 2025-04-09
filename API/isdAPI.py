@@ -14,15 +14,22 @@ import sys
 app = FastAPI()
 
 path = pathlib.Path(__file__).parent.resolve()
-os.makedir(f'path/{returned_isds}')
+os.makedirs(f'{path}/returned_isds', exist_ok=True)
 
 aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')
 aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
 region_name = os.environ.get('AWS_REGION', 'us-east-2')  # Default to 'us-east-2' if not set
-table_name = os.environ.get('DYNAMO_TABLE_NAME', 'ISD-DynamoDB-9EN5K7Y5DJHO') 
 
 
-# Initialize DynamoDB resource
+# Initialize DynamoDB client
+client = boto3.client(
+    'dynamodb',
+    aws_access_key_id=aws_access_key_id,
+    aws_secret_access_key=aws_secret_access_key,
+    region_name=region_name
+)
+
+# Initialize DynamoDB client
 dynamodb = boto3.resource(
     'dynamodb',
     aws_access_key_id=aws_access_key_id,
@@ -30,8 +37,13 @@ dynamodb = boto3.resource(
     region_name=region_name
 )
 
+# Get DynamoDB table name from client
+response = client.list_tables()
+table_name = response['TableNames'][0]
+
 # Reference the DynamoDB table
 table = dynamodb.Table(table_name)
+
 # Pydantic model for item input validation
 class Item(BaseModel):
     ID: str
