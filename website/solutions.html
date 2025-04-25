@@ -87,10 +87,7 @@
         <p>To address the challenge of large JSON data sizes, the service will implement a data compression mechanism, potentially using formats like gzip or custom binary formats to reduce the size of ISD files. This approach aims to reduce the data transfer time and storage space while maintaining the integrity of the ISD data.</p>
     </div>
 
-    <div class="solution content">
-        <h2>Memoization and Caching:</h2>
-        <p>Memoization will be used to cache frequently queried ISD data, reducing the need for repeated calculations. A caching layer, potentially using Redis or similar services, will store results from previous requests. The system will include a cache invalidation strategy to ensure that updated SPICE data is reflected in new ISD calculations.</p>
-    </div>
+
 
     <div class="solution content">
         <h2>Scalability and High Availability:</h2>
@@ -123,7 +120,6 @@
 			  <li>The web service uses the ALE (Abstraction Layer for Ephemerides) library to request ISD images from the NASA SPICE Database</li>
 			  <li>The ALE library returns the ISD image to the web service</li>
 			  <li>The web service then sends the ISD image to the caching server and to the user</li>
-			  <li>The caching server will periodically use the ALE library to check for any SPICE data changes and update the cache</li>
 			</ol>
 		</div>		
 	</div>
