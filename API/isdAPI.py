@@ -1,10 +1,9 @@
 from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import Response
 from pydantic import BaseModel
 import boto3
 import brotli
-import decimal
 import hashlib
-import pathlib
 import pvl
 import json
 import os
@@ -13,13 +12,10 @@ import sys
 
 app = FastAPI()
 
-path = pathlib.Path(__file__).parent.resolve()
-os.makedirs(f'{path}/returned_isds', exist_ok=True)
-
+# set AWS access parameters from environmental variables
 aws_access_key_id = os.environ.get('AWS_ACCESS_KEY_ID')
 aws_secret_access_key = os.environ.get('AWS_SECRET_ACCESS_KEY')
 region_name = os.environ.get('AWS_REGION', 'us-east-2')  # Default to 'us-east-2' if not set
-
 
 # Initialize DynamoDB client
 client = boto3.client(
@@ -32,8 +28,8 @@ client = boto3.client(
 # Initialize DynamoDB client
 dynamodb = boto3.resource(
     'dynamodb',
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
+    aws_access_key_id = aws_access_key_id,
+    aws_secret_access_key = aws_secret_access_key,
     region_name=region_name
 )
 
@@ -48,12 +44,34 @@ table = dynamodb.Table(table_name)
 class Item(BaseModel):
     ID: str
     Isd: str
+
+# adapted from Microsoft Copilot generated code
+# recursive function to parse string number values from isd dictionary into integers or floats
+def parse_number_string(isd_dict):
     
-class decimalToFloat(json.JSONEncoder):
-    def default(self, value):
-        if isinstance(value, decimal.Decimal):
-            return float(value)
+    # if dictionary, search through each value in every key
+    if isinstance(isd_dict, dict):
+        return {key: parse_number_string(value) for key, value in isd_dict.items()}
+        
+    # if list, search through every item
+    elif isinstance(isd_dict, list):
+        return [parse_number_string(item) for item in isd_dict]
     
+    # if string, parse it
+    elif isinstance(isd_dict, str):
+        
+        # Try to convert string to integer
+        try:
+            return int(isd_dict)
+        except ValueError: 
+            try:                              # if error, try to conver to float
+                return float(isd_dict)
+            except ValueError:                # if error, return original string
+                return isd_dict
+
+# end of adapted code
+        
+# Create a mini label string from a label file
 def create_mini_label(input_file):
     
     # opening label file
@@ -70,7 +88,8 @@ def create_mini_label(input_file):
     mini_label_string = str(mini_label_dict)
 
     return mini_label_string
-    
+   
+# Create a hash from a mini label string 
 def create_hash(mini_label_string):
 
     # creating hash of encoded MiniLabel string
@@ -84,99 +103,77 @@ def create_hash(mini_label_string):
     
 @app.post("/getIsd")
 async def get_isd(request: Request):
+    
+    # get request from client, then decompress and decode it
     label = await request.body()
     label_uncompress = brotli.decompress(label)
     label_string = label_uncompress.decode()
     
     temp_file = 'temp.lbl'
     
+    # write label string to file to use for isd generation
     with open(temp_file, 'w') as label_file:
         label_file.write(label_string)
     
-    
-    spiceinit_cmd = f"spiceinit from={temp_file}"
+    # set spiceinit variable
+    spiceinit_cmd = f'spiceinit from={temp_file}'
     os.system (spiceinit_cmd)
-        
-    requested_isd = os.system(f'isd_generate {temp_file} -v')
+    
+    # create a mini label and hash from label file
     mini_label = create_mini_label(temp_file)
     isd_hash = create_hash(mini_label)
     
+    # check if isd exists by searching database with hash
+    serverResponse = table.get_item(
+            Key = {
+                'id': isd_hash
+            }
+        )
+    
+    # if serverResponse dictionary only has one item (a metadata item) that means no isd returned, generate isd
+    if(len(serverResponse) == 1):
+        
+        # generate an isd from label file
+        requested_isd = os.system(f'isd_generate {temp_file} -v')
+
+        # reads isd file as dictionary
+        with open('temp.json', 'r') as isd_file:
+            isd_dict = json.load(isd_file, parse_int = str, parse_float = str)
+            
+        # sends item with hash id and isd value to table, then saves response
+        table.put_item(
+            Item = {
+                'id': isd_hash,
+                'isd': isd_dict
+            }
+        )
+
+        # get isd back from server
+        serverResponse = table.get_item(
+            Key = {
+                'id': isd_hash
+            }
+        )
+        
     os.remove(temp_file)
     
-    with open('temp.json', 'r') as isd_file:
-        isd_dict = json.load(isd_file, parse_float = decimal.Decimal)
-        
-    table.put_item(
-        Item = {
-            'id': isd_hash,
-            'isd': isd_dict
-        }
-    )
-        
-    serverResponse = table.get_item(
-        Key = {
-            'id': isd_hash
-        }
-    )
     # remove server response metadata, return isd key values only
-    outputDict = {key:serverResponse['Item'][key] for key in ['isd']}
-
+    output_dict = {key:serverResponse['Item'][key] for key in ['isd']}
+    
     # remove isd key, only have inner values
-    outputDict = outputDict['isd']
+    output_dict = output_dict['isd']
     
-    outputFile = f"{path}/returned_isds/{isd_hash}_isd.json"
-
-    # serializes dictionary to json object and writes to file
-    with open(outputFile, 'w') as isd_output:
-        json.dump(outputDict, isd_output, cls = decimalToFloat, indent = 2)
-
-# CRUD Operations inside FastAPI routes
-@app.post("/create")
-def create_item(inHash: str, isdDict: dict):
-    with open(inIsd, 'r') as isdFile:
-        isdDict = json.load(isdFile, parse_float = decimal.Decimal)
-
-    # sends item with hash id and isd value to table, then saves response
-    table.put_item(
-        Item = {
-            'id': inHash,
-            'isd': isdDict
-        }
-    )
+    # parse string values in isd dictionary and convert into int or float when applicable
+    output_dict = parse_number_string(output_dict)
     
-
-@app.get("/read/{id}")
-def read_item(inHash: str):
-    serverResponse = table.get_item(
-        Key = {
-            'id': inHash
-        }
-    )
-    # remove server response metadata, return isd key values only
-    outputDict = {key:serverResponse['Item'][key] for key in ['isd']}
-
-    # remove isd key, only have inner values
-    outputDict = outputDict['isd']
+    # load output_dict as a json string
+    output_string = json.dumps(output_dict)
     
-    # serializes dictionary to json object and writes to file
-    with open(outputFile, 'w') as isd_output:
-        json.dump(outputDict, isd_output, cls = decimalToFloat, indent = 2)
-
-@app.put("/update/{id}")
-def update_item(id: str, item: Item):
-    table.update_item(
-        Key={'ID': id},
-        UpdateExpression="set Name = :name, Age = :age",
-        ExpressionAttributeValues={
-            ':name': item.Name,
-            ':age': item.Age
-        }
-    )
-    return {"message": "Item updated"}
-
-@app.delete("/delete/{id}")
-def delete_item(id: str):
-    table.delete_item(Key={'ID': id})
-    return {"message": "Item deleted"}
+    # encode and compress isd json string
+    output_encode = output_string.encode()
+    output_compress = brotli.compress(output_encode)
+    
+    # send isd back to client
+    return Response(content = output_compress, media_type = "application/octet-stream")
 
 # Run the app with: uvicorn isdAPI:app --reload
