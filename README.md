@@ -2,7 +2,7 @@
 Cloud-Based Planetary Ephemerides is a capstone project designed to provide accurate planetary position data through a scalable, cloud-hosted API. This project integrates astronomical computation with modern web technologies to deliver real-time ephemeris data, suitable for applications in astronomy, education, and software development.
 
 
-Features
+# Features
 
 ● RESTful API: Access planetary positions via HTTP endpoints.
 
@@ -13,7 +13,7 @@ Features
 ● User Interface: Web-based frontend for interactive exploration of planetary data.
 
 
-Project Structure
+# Project Structure
 
 Cloud-Based-Planetary-Ephemerides/
 
@@ -28,7 +28,7 @@ Cloud-Based-Planetary-Ephemerides/
 └── README.md          # Project overview and setup instructions
 
 
-Technologies Used
+# Technologies Used
 
 ● Backend: Python, Flask, and astronomical libraries for ephemeris calculations.
 
@@ -39,7 +39,7 @@ Technologies Used
 ● Data Sources: Integration with astronomical datasets (e.g., NASA JPL ephemerides).
 
 
-Getting Started
+# Getting Started
 
 Prerequisites
 
@@ -50,7 +50,7 @@ Prerequisites
 ● Docker (optional, for containerized deployment)
 
 
-Backend Setup (API)
+# Backend Setup (API)
 1. Navigate to the API directory:
    cd API
 2. Create a virtual environment and activate it:
@@ -63,7 +63,7 @@ Backend Setup (API)
    The API will be accessible at http://localhost:5000.
 
 
-Frontend Setup (Web Interface)
+# Frontend Setup (Web Interface)
 1. Navigate to the website directory:
    cd website
 2. Install the required dependencies:
@@ -73,14 +73,14 @@ Frontend Setup (Web Interface)
    The web application will be accessible at http://localhost:3000.
 
 
-Usage
+# Usage
 
 ● Access the web interface to visualize planetary data.
 
 ● Utilize the API endpoints to programmatically retrieve ephemeris data. Detailed API documentation is available in the API/ directory.
 
 
-License
+# License
 
 This project is licensed under the CC0-1.0 License, dedicating it to the public domain.
 
