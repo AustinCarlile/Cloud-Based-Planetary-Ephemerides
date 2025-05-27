@@ -2,9 +2,13 @@
 Cloud-Based Planetary Ephemerides is a capstone project designed to provide accurate planetary position data through a scalable, cloud-hosted API. This project integrates astronomical computation with modern web technologies to deliver real-time ephemeris data, suitable for applications in astronomy, education, and software development.
 
 Features
+
 ● RESTful API: Access planetary positions via HTTP endpoints.
+
 ● Cloud Deployment: Hosted on cloud platforms for high availability and scalability.
+
 ● Modular Architecture: Separation of concerns between computation, API handling, and frontend presentation.
+
 ● User Interface: Web-based frontend for interactive exploration of planetary data.
 
 Project Structure
